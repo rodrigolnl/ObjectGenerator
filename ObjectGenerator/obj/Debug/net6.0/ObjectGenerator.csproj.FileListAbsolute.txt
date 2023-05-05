@@ -1,0 +1,34 @@
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.csproj.AssemblyReference.cache
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.AssemblyInfoInputs.cache
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.AssemblyInfo.cs
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.csproj.CoreCompileInputs.cache
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\ObjectGenerator.exe
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\ObjectGenerator.deps.json
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\ObjectGenerator.runtimeconfig.json
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\ObjectGenerator.dll
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\ObjectGenerator.pdb
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.csproj.CopyComplete
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.dll
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\refint\ObjectGenerator.dll
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.pdb
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.genruntimeconfig.cache
+C:\Users\rodrigo.lima\source\repos\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ref\ObjectGenerator.dll
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.csproj.AssemblyReference.cache
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.AssemblyInfoInputs.cache
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.AssemblyInfo.cs
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.csproj.CoreCompileInputs.cache
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.dll
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\refint\ObjectGenerator.dll
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.pdb
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\ObjectGenerator.exe
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\ObjectGenerator.deps.json
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\ObjectGenerator.runtimeconfig.json
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\ObjectGenerator.dll
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\ObjectGenerator.pdb
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.csproj.CopyComplete
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.genruntimeconfig.cache
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ref\ObjectGenerator.dll
