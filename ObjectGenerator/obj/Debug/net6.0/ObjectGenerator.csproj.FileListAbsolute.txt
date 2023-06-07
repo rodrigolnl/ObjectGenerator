@@ -32,3 +32,5 @@ C:\Projetos Git\ObjectGenerator\ObjectGenerator\bin\Debug\net6.0\Newtonsoft.Json
 C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.csproj.CopyComplete
 C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.genruntimeconfig.cache
 C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ref\ObjectGenerator.dll
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.Properties.Resources.resources
+C:\Projetos Git\ObjectGenerator\ObjectGenerator\obj\Debug\net6.0\ObjectGenerator.csproj.GenerateResource.cache
