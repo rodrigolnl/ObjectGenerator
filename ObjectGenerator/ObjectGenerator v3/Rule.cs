@@ -9,7 +9,9 @@ namespace ObjectGenerator.ObjectGenerator_v3
         public Preset? Preset { get; set; }
         public dynamic? Value { get; set; }
         public string? Format { get; set; }
-        public PropertyInfo? PropertySource { get; set; }
+        public Func<object, dynamic>? PropertySource { get; set; }
         public Operator? Operator { get; set; }
+        public Func<object, bool>? Statement { get; set; }
+        public If? Conditional { get; set; }
     }
 }

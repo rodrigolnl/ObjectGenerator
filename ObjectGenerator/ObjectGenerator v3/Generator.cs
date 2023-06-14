@@ -1,5 +1,7 @@
-﻿using ObjectGenerator.ObjectGenerator_v2;
+﻿using Newtonsoft.Json.Linq;
+using ObjectGenerator.ObjectGenerator_v2;
 using ObjectGenerator.Properties;
+using System.Collections;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -13,30 +15,35 @@ namespace ObjectGenerator.ObjectGenerator_v3
 
         private Random? Rnd;
         int Count = 0;
-
+        
         #endregion [ Variables ]
 
         #region [ Constants | ReadOnly ]
 
-        private readonly Map Map;
+        private readonly BaseMap Map;
         private readonly PresetData GeneratorData;
-        const int max_array_items = 20;
-        const int max_list_items = 50;
+        private readonly int max_array_items;
+        private readonly int max_list_items;
 
         #endregion [ Constants | ReadOnly ]
 
         #region [ Constructor ]
-        public Generator(Map map)
+
+        public Generator(BaseMap map, int maxIterables = 50)
         {
+            max_array_items = maxIterables;
+            max_list_items = maxIterables;
             var json_string = Encoding.UTF8.GetString(Resources.base_generator);
             GeneratorData = JsonSerializer.Deserialize<PresetData>(json_string) ?? new PresetData();
             Map = map;
         }
-        public Generator()
+        public Generator(int maxIterables = 50)
         {
+            max_array_items = maxIterables;
+            max_list_items = maxIterables;
             var json_string = Encoding.UTF8.GetString(Resources.base_generator);
             GeneratorData = JsonSerializer.Deserialize<PresetData>(json_string) ?? new PresetData();
-            Map = new Map();
+            Map = new BaseMap();
         }
 
         #endregion [ Constructor ]
@@ -57,7 +64,7 @@ namespace ObjectGenerator.ObjectGenerator_v3
                 var propertyRules = allRules.Where(x => x.Property == property).ToList();
                 var setPropertyRules = propertyRules.Where(x => x.RuleType == RuleType.SetProperty).ToList();
                 var setPropertyFromPropertyRules = propertyRules.Where(x => x.RuleType == RuleType.SetPropertyFromProperty).ToList();
-                var conditionalRules = propertyRules.Where(x => x.RuleType == RuleType.Conditional).ToList();
+                var conditionalRules = propertyRules.Where(x => x.RuleType == RuleType.Range).ToList();
 
 
                 long? min = null, max = null;
@@ -97,9 +104,23 @@ namespace ObjectGenerator.ObjectGenerator_v3
             foreach (var rule in allRules.Where(x => x.RuleType == RuleType.SetPropertyFromProperty).ToList())
                 SetPropertyFromProperty(obj, rule.Property, rule.PropertySource);
 
+            foreach (var rule in allRules.Where(x => x.RuleType == RuleType.PropertyConditional).ToList())
+            {
+                if (rule.Statement(obj) == (rule.Conditional == If.True ? true : false))
+                {
+                    if (rule.Value != null)
+                        SetValue(obj, rule.Property, rule.Value);
+                    else if (rule.Preset != null)
+                        SetPreset(obj, rule.Property, rule.Preset);
+                    else if (rule.PropertySource != null)
+                        SetPropertyFromProperty(obj, rule.Property, rule.PropertySource);
+                }
+            }
+
+
             foreach (var rule in allRules.Where(x => x.RuleType == RuleType.PostExecution).ToList())
             {
-                if (rule.Format != null)
+                if (rule.Format != null && (rule.Statement == null || rule.Statement(obj) == (rule.Conditional == If.True ? true : false)))
                 {
                     if (rule.Property.PropertyType == typeof(string))
                         SetFormat(obj, rule.Property, rule.Format);
@@ -150,72 +171,133 @@ namespace ObjectGenerator.ObjectGenerator_v3
             dynamic? content = null;
             if (type == null)
                 throw new Exception();
-            if (type.IsArray)
+            var isList = IsList(type);
+            if (type.IsArray || isList)
             {
-                if (type.GetElementType() == typeof(int))
+                if (type.IsArray)
+                    type = type.GetElementType();
+                else
+                    type = type.GenericTypeArguments[0];
+
+                if (type == typeof(int))
                 {
                     var array = new int[rnd.Next(max_array_items)];
                     for (int i = 0; i < array.Length; i++)
                         array[i] = rnd.Next();
-                    content = array;
+                    if (isList)
+                        content = array.ToList();
+                    else
+                        content = array;
                 }
-                else if (type.GetElementType() == typeof(long))
+                else if (type == typeof(long))
                 {
                     var array = new long[rnd.Next(max_array_items)];
                     for (int i = 0; i < array.Length; i++)
                         array[i] = rnd.NextInt64();
-                    content = array;
+                    if (isList)
+                        content = array.ToList();
+                    else
+                        content = array;
                 }
-                else if (type.GetElementType() == typeof(float))
+                else if (type == typeof(float))
                 {
                     var array = new float[rnd.Next(max_array_items)];
                     for (int i = 0; i < array.Length; i++)
                         array[i] = (float)rnd.NextDouble();
-                    content = array;
+                    if (isList)
+                        content = array.ToList();
+                    else
+                        content = array;
                 }
-                else if (type.GetElementType() == typeof(double))
+                else if (type == typeof(double))
                 {
                     var array = new double[rnd.Next(max_array_items)];
                     for (int i = 0; i < array.Length; i++)
                         array[i] = rnd.NextDouble();
-                    content = array;
+                    if (isList)
+                        content = array.ToList();
+                    else
+                        content = array;
                 }
-                else if (type.GetElementType() == typeof(bool))
+                else if (type == typeof(bool))
                 {
                     var array = new bool[rnd.Next(max_array_items)];
                     for (int i = 0; i < array.Length; i++)
                         array[i] = rnd.Next(2) == 1;
-                    content = array;
+                    if (isList)
+                        content = array.ToList();
+                    else
+                        content = array;
                 }
-                else if (type.GetElementType() == typeof(char))
+                else if (type == typeof(char))
                 {
                     var abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                     var array = new char[rnd.Next(max_array_items)];
                     for (int i = 0; i < array.Length; i++)
                         array[i] = abc[rnd.Next(26)];
-                    content = array;
+                    if (isList)
+                        content = array.ToList();
+                    else
+                        content = array;
                 }
-                else if (type.GetElementType() == typeof(string))
+                else if (type == typeof(string))
                 {
                     var array = new string[rnd.Next(max_array_items)];
                     for (int i = 0; i < array.Length; i++)
                         array[i] = $"String.{i}";
-                    content = array;
+                    if (isList)
+                        content = array.ToList();
+                    else
+                        content = array;
                 }
-                else if (type.GetElementType() == typeof(decimal))
+                else if (type == typeof(decimal))
                 {
                     var array = new decimal[rnd.Next(max_array_items)];
                     for (int i = 0; i < array.Length; i++)
                         array[i] = (decimal)(rnd.NextDouble() + rnd.Next(100));
-                    content = array;
+                    if (isList)
+                        content = array.ToList();
+                    else
+                        content = array;
                 }
-                else if (type.GetElementType() != null && type.GetElementType().BaseType == typeof(Enum))
+                else if (type != null && type.BaseType == typeof(Enum))
                 {
-                    var array = Array.CreateInstance(type.GetElementType(), rnd.Next(max_array_items));
-                    Array enum_values = Enum.GetValues(type.GetElementType());
+                    var array = Array.CreateInstance(type, rnd.Next(max_array_items));
+                    Array enum_values = Enum.GetValues(type);
                     for (int i = 0; i < array.Length; i++)
                         array.SetValue(enum_values.GetValue(rnd.Next(enum_values.Length)), i);
                     content = array;
+                }
+                else if (type == typeof(DateTime) || Nullable.GetUnderlyingType(type) == typeof(DateTime))
+                {
+                    var array = new DateTime[rnd.Next(max_array_items)];
+                    for (int i = 0; i < array.Length; i++)
+                        array[i] = new DateTime(rnd.NextInt64(min ?? 628000000000000000, max ?? 645000000000000000));
+                    if (isList)
+                        content = array.ToList();
+                    else
+                        content = array;
+                }
+                else if (type.BaseType == typeof(object))
+                {
+                    var array = new dynamic[rnd.Next(max_array_items)];
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        var new_obj = Activator.CreateInstance(type);
+                        Populate(new_obj);
+                        array[i] = new_obj;
+                    }
+
+                    if (isList)
+                    {
+                        Type concreteListType = typeof(List<>).MakeGenericType(type);
+                        IList list = Activator.CreateInstance(concreteListType) as IList;
+                        foreach(var item in array)
+                            list.Add(item);
+                        content = list;
+                    }
+                    else
+                        content = array;
                 }
             }
             else
@@ -240,7 +322,6 @@ namespace ObjectGenerator.ObjectGenerator_v3
                     content = Enum.GetValues(type).GetValue(rnd.Next(Enum.GetValues(type).Length));
                 else if (type == typeof(DateTime) || Nullable.GetUnderlyingType(type) == typeof(DateTime))
                 {
-
                     content = new DateTime(rnd.NextInt64(min ?? 628000000000000000, max ?? 645000000000000000));
                 }
                 else if (type.BaseType == typeof(object))
@@ -511,17 +592,14 @@ namespace ObjectGenerator.ObjectGenerator_v3
             if (property.CanWrite)
                 property.SetValue(obj, signal + texto_formatado);
         }
-        private void SetPropertyFromProperty(object obj, PropertyInfo property, PropertyInfo sourceProperty)
+        private void SetPropertyFromProperty(object obj, PropertyInfo property, Func<object, dynamic> sourceProperty)
         {
             if (property.CanWrite)
-                property.SetValue(obj, sourceProperty.GetValue(obj));
+                property.SetValue(obj, sourceProperty(obj));
         }
 
-        private bool IsList(Type type)
-        {
-            return (type.IsGenericType && type.GetType().GetGenericTypeDefinition() == typeof(IList<>)) 
-                || (type.IsGenericType && type.GetType().GetGenericTypeDefinition() == typeof(List<>));
-        }
+        private bool IsList(Type type) => (type.IsGenericType && (type.GetGenericTypeDefinition() == typeof(List<>) || type.GetGenericTypeDefinition() == typeof(IList<>)));
+        
 
         #endregion [ Private ]
     }

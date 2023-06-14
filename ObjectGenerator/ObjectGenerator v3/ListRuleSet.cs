@@ -38,7 +38,7 @@
         {
             Rules.Add(new Rule()
             {
-                RuleType = RuleType.Conditional,
+                RuleType = RuleType.Range,
                 Operator = operation,
                 Value = value
             });

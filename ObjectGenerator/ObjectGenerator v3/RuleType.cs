@@ -5,6 +5,7 @@
         SetProperty,
         SetPropertyFromProperty,
         PostExecution,
-        Conditional
+        Range,
+        PropertyConditional
     }
 }
