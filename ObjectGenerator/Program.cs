@@ -9,12 +9,12 @@ using System.Reflection.Emit;
 //List<int> teste = new List<int>() { 1};
 //var a = teste.GetType().GetElementType();
 
-var map = new Map();
-var generator = new Generator(map);
+//var map = new Map();
+//var generator = new Generator(map);
 
-var cliente = new ClienteModel();
-generator.Populate(cliente);
-Console.WriteLine(cliente);
+//var cliente = new ClienteModel();
+//generator.Populate(cliente);
+//Console.WriteLine(cliente);
 //PropertyInfo[] properties = cliente.GetType().GetProperties();
 //var teste = properties[0].Name;
 
@@ -51,3 +51,6 @@ Console.WriteLine(cliente);
 //}
 
 //teste(x => x.id == 1);
+var a = "61";
+var teste = "M31880826" + DateTime.Now.ToString("yyyyMMddHHmmssfffffff00");
+Console.WriteLine(teste);

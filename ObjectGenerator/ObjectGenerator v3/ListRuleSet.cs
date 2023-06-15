@@ -20,7 +20,7 @@
         {
             Rules.Add(new Rule()
             {
-                RuleType = RuleType.PostExecution,
+                RuleType = RuleType.Format,
                 Format = format
             });
             return this;

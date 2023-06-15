@@ -32,7 +32,7 @@ namespace ObjectGenerator.ObjectGenerator_v3
 
             Rules.Add(new Rule()
             {
-                RuleType = RuleType.PropertyConditional,
+                RuleType = RuleType.ConditionalStatement,
                 Property = GetPropertyInfo(property),
                 Statement = capsuled,
                 Conditional = codition,
@@ -68,7 +68,7 @@ namespace ObjectGenerator.ObjectGenerator_v3
 
             Rules.Add(new Rule()
             {
-                RuleType = RuleType.PropertyConditional,
+                RuleType = RuleType.ConditionalStatement,
                 Property = GetPropertyInfo(property),
                 Statement = capsuled,
                 Conditional = codition,
@@ -82,7 +82,7 @@ namespace ObjectGenerator.ObjectGenerator_v3
             Func<object, dynamic> srcCapsuled = value => propertySource((T)value);
             Rules.Add(new Rule()
             {
-                RuleType = RuleType.PropertyConditional,
+                RuleType = RuleType.ConditionalStatement,
                 Property = GetPropertyInfo(property),
                 Statement = capsuled,
                 Conditional = codition,
@@ -95,7 +95,7 @@ namespace ObjectGenerator.ObjectGenerator_v3
         {
             Rules.Add(new Rule()
             {
-                RuleType = RuleType.PostExecution,
+                RuleType = RuleType.Format,
                 Property = GetPropertyInfo(property),
                 Format = format
             });
@@ -106,7 +106,7 @@ namespace ObjectGenerator.ObjectGenerator_v3
             Func<object, bool> capsuled = value => statement((T)value);
             Rules.Add(new Rule()
             {
-                RuleType = RuleType.PostExecution,
+                RuleType = RuleType.Format,
                 Property = GetPropertyInfo(property),
                 Format = format,
                 Conditional = codition,

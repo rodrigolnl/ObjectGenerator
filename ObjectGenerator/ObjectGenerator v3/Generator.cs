@@ -104,7 +104,7 @@ namespace ObjectGenerator.ObjectGenerator_v3
             foreach (var rule in allRules.Where(x => x.RuleType == RuleType.SetPropertyFromProperty).ToList())
                 SetPropertyFromProperty(obj, rule.Property, rule.PropertySource);
 
-            foreach (var rule in allRules.Where(x => x.RuleType == RuleType.PropertyConditional).ToList())
+            foreach (var rule in allRules.Where(x => x.RuleType == RuleType.ConditionalStatement).ToList())
             {
                 if (rule.Statement(obj) == (rule.Conditional == If.True ? true : false))
                 {
@@ -118,7 +118,7 @@ namespace ObjectGenerator.ObjectGenerator_v3
             }
 
 
-            foreach (var rule in allRules.Where(x => x.RuleType == RuleType.PostExecution).ToList())
+            foreach (var rule in allRules.Where(x => x.RuleType == RuleType.Format).ToList())
             {
                 if (rule.Format != null && (rule.Statement == null || rule.Statement(obj) == (rule.Conditional == If.True ? true : false)))
                 {
